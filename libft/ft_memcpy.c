@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/13 17:57:22 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/26 17:25:05 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+/**
+ * @brief
+ */
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	unsigned char	*temp_dest;
+	unsigned char	*temp_src;
+	size_t			i;
 
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
-	{
-		n /= 16L;
-		len++;
-	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
+	temp_dest = (unsigned char *)dest;
+	temp_src = (unsigned char *)src;
+	i = 0;
+	if (temp_dest == NULL && temp_src == NULL)
 		return (NULL);
-	hex[len] = '\0';
-	while (len--)
+	while (i < n)
 	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
+		*temp_dest = *temp_src;
+		temp_src++;
+		temp_dest++;
+		i++;
 	}
-	return (hex);
+	return (dest);
 }

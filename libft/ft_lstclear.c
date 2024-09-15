@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/22 21:56:04 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/25 11:21:12 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	t_list	*temp;
+	t_list	*cur;
 
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+	if (del == NULL)
+		return ;
+	if (lst && *lst)
 	{
-		n /= 16L;
-		len++;
+		cur = *lst;
+		while (cur)
+		{
+			temp = cur;
+			cur = cur->next;
+			ft_lstdelone(*lst, del);
+		}
+		*lst = NULL;
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
-	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
-	}
-	return (hex);
 }

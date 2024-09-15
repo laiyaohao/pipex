@@ -32,10 +32,22 @@ typedef struct s_data
 	int		*pipefd[2];
 	int	infile;
 	int	outfile;
+	char	*cmd1;
+	char	*cmd2;
 }						t_data;
 
+extern char *paths[];
 
+char	*ft_strnstr(const char *big, const char *little, size_t len);
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin(char const *s1, char const *s2);
 int		ft_printf(const char *str, ...);
-int		pipex(char *cmd1, char *cmd2, char *argv);
+int		open_file(char *filepath, t_data *data);
+int		check_cmd(char *cmd1, char *cmd2, t_data *data);
+int		create_pipe(t_data *data);
+int		check_fork(pid_t pid);
+int		num_arg(int argc);
+int		pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd);
+void  check_outfile(char *filepath, t_data *data);
 
 #endif

@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/22 21:53:29 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/25 10:29:07 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
-
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+	if (del == NULL)
+		return ;
+	if (lst)
 	{
-		n /= 16L;
-		len++;
+		del(lst->content);
+		free(lst);
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
-	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
-	}
-	return (hex);
 }

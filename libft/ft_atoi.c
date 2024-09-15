@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/15 11:50:37 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/16 22:27:10 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+int	ft_atoi(const char *nptr)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	long	i;
+	long	ans;
+	int		sign;
 
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+	i = 0;
+	ans = 0;
+	sign = 1;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
 	{
-		n /= 16L;
-		len++;
+		if (nptr[i] == '-')
+			sign = -1;
+		i++;
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
+	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
+		ans = ans * 10 + (nptr[i] - 48);
+		i++;
 	}
-	return (hex);
+	if (sign == -1)
+		ans = ans * -1;
+	return (ans);
 }

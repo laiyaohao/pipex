@@ -12,18 +12,20 @@
 
 #include "pipex.h"
 
-int	pipex(pid_t *pid, int to_close_fd, int to_use_fd, int infile, char *cmd1, char *cmd2)
+int	pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd)
 {
-	if (*pid == -1)
+	close(close_pfd);
+	if (pid == 0)
 	{
-		perror("fork");
-		return (1);
-	}
-	close(to_close_fd);
-	if (*pid == 0)
-	{
-		
-		return (1);
+		dup2(use_pfd, infile);
+		close(use_pfd);
+		// right now, cmd will look something like:
+		// "ls -l"
+		// need to split it into 2 parts
+		// first, "ls"
+		if (execve(cmd, NULL, NULL) == -1)
+			return (1);
+		return (0);
 	}
 	
 	

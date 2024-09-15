@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/13 15:23:34 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/26 15:22:01 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+static int	ft_islower(int c)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	if (c <= 'z' && c >= 'a')
+	{
+		return (1);
+	}
+	return (0);
+}
 
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+static int	ft_isupper(int c)
+{
+	if (c <= 'Z' && c >= 'A')
 	{
-		n /= 16L;
-		len++;
+		return (1);
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
+	return (0);
+}
+
+int	ft_isalpha(int c)
+{
+	if ((ft_islower(c)) || (ft_isupper(c)))
 	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
+		return (1);
 	}
-	return (hex);
+	return (0);
 }

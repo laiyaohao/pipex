@@ -1,40 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/21 01:43:11 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/25 10:29:57 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+t_list	*ft_lstlast(t_list *lst)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
-
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
-	{
-		n /= 16L;
-		len++;
-	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
+	if (lst == NULL)
 		return (NULL);
-	hex[len] = '\0';
-	while (len--)
+	while (lst->next)
 	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
+		lst = lst->next;
 	}
-	return (hex);
+	return (lst);
 }

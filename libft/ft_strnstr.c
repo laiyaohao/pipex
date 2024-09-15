@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/19 19:22:51 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/19 22:00:53 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+char	*ft_strnstr(const char *big, const char *little, size_t len)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	char	*big_cp;
+	size_t	i;
+	size_t	j;
+	size_t	l_l;
 
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+	i = 0;
+	big_cp = (char *)big;
+	l_l = ft_strlen(little);
+	while (i < len)
 	{
-		n /= 16L;
-		len++;
+		j = 0;
+		if (big_cp[i] == little[j])
+		{
+			while (big_cp[i + j] == little[j] && j < l_l)
+			{
+				j++;
+			}
+			if (j == l_l)
+			{
+				return (big_cp + i);
+			}
+		}
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
-	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
-	}
-	return (hex);
+	return (0);
 }

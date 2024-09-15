@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/19 19:47:01 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/25 18:28:01 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	unsigned char	*s1c;
+	unsigned char	*s2c;
+	size_t			i;
 
-	len = 0;
-	tmp = n;
+	i = 0;
+	s1c = (unsigned char *)s1;
+	s2c = (unsigned char *)s2;
 	if (n == 0)
-		len = 1;
-	while (n > 0L)
+		return (0);
+	while (i < n && s1c[i] == s2c[i])
 	{
-		n /= 16L;
-		len++;
+		i++;
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
-	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
-	}
-	return (hex);
+	return (s1c[i] - s2c[i]);
 }

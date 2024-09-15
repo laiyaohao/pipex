@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/17 23:51:37 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/26 14:21:25 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	unsigned long long	t_size;
+	void				*pter;
 
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+	t_size = nmemb * size;
+	if (t_size > INT_MAX)
 	{
-		n /= 16L;
-		len++;
-	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
 		return (NULL);
-	hex[len] = '\0';
-	while (len--)
-	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
 	}
-	return (hex);
+	pter = (void *) malloc(t_size);
+	if (pter == NULL)
+	{
+		return (0);
+	}
+	return (ft_memset(pter, 0, t_size));
 }

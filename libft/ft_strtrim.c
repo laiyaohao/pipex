@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/21 02:36:08 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/26 16:03:43 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+char	*ft_strtrim(char const *s1, char const *set)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	size_t	len;
+	char	*t_set;
+	size_t	i;
+	size_t	j;
+	size_t	size;
 
 	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+	i = 0;
+	j = 0;
+	t_set = (char *)set;
+	len = ft_strlen(s1);
+	while (ft_strchr(s1, *t_set) != NULL)
 	{
-		n /= 16L;
-		len++;
+		i++;
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
+	while (ft_strrchr(s1, *t_set) != NULL)
 	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
+		j++;
 	}
-	return (hex);
+	size = len - i - j;
+	return (ft_substr(s1, i, size));
 }

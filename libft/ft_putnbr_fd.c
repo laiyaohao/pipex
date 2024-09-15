@@ -1,40 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_itohex.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/23 19:41:23 by ylai              #+#    #+#             */
-/*   Updated: 2024/07/25 00:02:22 by ylai             ###   ########.fr       */
+/*   Created: 2024/05/22 21:28:42 by ylai              #+#    #+#             */
+/*   Updated: 2024/05/25 11:20:56 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../ft_printf.h"
+#include "libft.h"
 
-char	*ft_itohex(unsigned long n, char *base)
+void	ft_putnbr_fd(int n, int fd)
 {
-	char				*hex;
-	unsigned long		tmp;
-	long long			len;
+	unsigned int	n_cpy;
 
-	len = 0;
-	tmp = n;
-	if (n == 0)
-		len = 1;
-	while (n > 0L)
+	if (n < 0)
 	{
-		n /= 16L;
-		len++;
+		n_cpy = -n;
+		ft_putchar_fd('-', fd);
 	}
-	hex = (char *) malloc(sizeof(char) * (len + 1));
-	if (hex == NULL)
-		return (NULL);
-	hex[len] = '\0';
-	while (len--)
+	else
 	{
-		hex[len] = base[tmp % 16];
-		tmp = tmp / 16;
+		n_cpy = n;
 	}
-	return (hex);
+	if (n_cpy < 10)
+	{
+		ft_putchar_fd((n_cpy + 48), fd);
+	}
+	else
+	{
+		ft_putnbr_fd((n_cpy / 10), fd);
+		ft_putnbr_fd((n_cpy % 10), fd);
+	}
 }
