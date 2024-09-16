@@ -12,7 +12,7 @@
 
 #include "pipex.h"
 
-int	pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd)
+int	pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd, char **cmd_f_sp)
 {
 	close(close_pfd);
 	if (pid == 0)
@@ -23,7 +23,7 @@ int	pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd)
 		// "ls -l"
 		// need to split it into 2 parts
 		// first, "ls"
-		if (execve(cmd, NULL, NULL) == -1)
+		if (execve(cmd, cmd_f_sp, NULL) == -1)
 			return (1);
 		return (0);
 	}

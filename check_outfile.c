@@ -12,7 +12,7 @@ void  check_outfile(char *filepath, t_data *data)
   // filepath exist
   else
   {
-    outf_fd = open(filepath, O_WRONLY | O_TRUNC), 0644;
+    outf_fd = open(filepath, O_WRONLY | O_TRUNC, 0644);
     if (outf_fd < 0)
     {
       perror("Error opening outfile");

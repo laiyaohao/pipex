@@ -23,11 +23,11 @@ int	main(int argc, char **argv)
 		return (1);
 	data.pid1 = fork();
 	if (check_fork(data.pid1) || \
-	pipey(data.pid1, data.pipefd[0], data.pipefd[1], data.infile, data.cmd1))
+	pipey(data.pid1, data.pipefd[0], data.pipefd[1], data.infile, data.cmd1, data.cmd_f_sp1))
 		return (1);
 	data.pid2 = fork();
 	check_outfile(argv[4], &data);
-	if (pipey(data.pid2, data.pipefd[1], data.pipefd[0], data.outfile, data.cmd2))
+	if (pipey(data.pid2, data.pipefd[1], data.pipefd[0], data.outfile, data.cmd2, data.cmd_f_sp2))
 		return (1);
 	waitpid(data.pid1, NULL, 0);
 	waitpid(data.pid2, NULL, 0);

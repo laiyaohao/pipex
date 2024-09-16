@@ -12,7 +12,7 @@
 
 NAME := pipex
 CC := cc
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -g
 FT_PRINTF_DIR := ft_printf
 FT_PRINTF := ${FT_PRINTF_DIR}/libftprintf.a
 LIBFT_DIR := libft
@@ -20,7 +20,7 @@ LIBFT := ${LIBFT_DIR}/libft.a
 SRC_FILE_NAMES := main check_cmd check_fork create_pipe initialize_paths \
 									num_arg open_file pipey check_outfile
 SRCS := ${addsuffix .c, $(SRC_FILE_NAMES)}
-OBJS := ${SRCS:.c:.o}
+OBJS := ${SRCS:.c=.o}
 
 all: ${FT_PRINTF} ${LIBFT} $(NAME)
 

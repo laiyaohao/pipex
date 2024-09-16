@@ -7,7 +7,7 @@ int	check_full(char *cmd)
 	i = 0;
 	while (paths[i] != NULL)
 	{
-		if (ft_strnstr(cmd, paths[i], ft_strlen(paths[i])) != '\0')
+		if (*ft_strnstr(cmd, paths[i], ft_strlen(paths[i])) != '\0')
 		{
 			return (1);
 		}
@@ -16,49 +16,59 @@ int	check_full(char *cmd)
 	return (0);
 }
 
-int	set_path(char *cmd1, char *cmd2, t_data *data)
+int	set_path(char **cmd_f_sp, char *cmd)
 {
 	int	i;
-	char	*full_path1;
-	char	*full_path2;
+	char	*full_path;
 
 	i = 0;
-	while (paths[i] != NULL && data->cmd1 != NULL)
+	while (paths[i] != NULL && cmd == NULL)
 	{
-		full_path1 = ft_strjoin(paths[i], cmd1);
-		if (access(full_path1, X_OK))
-			data->cmd1 = full_path1;
+		full_path = ft_strjoin(paths[i], cmd_f_sp[0]);
+		if (access(full_path, X_OK))
+		{
+			cmd = full_path;
+			cmd_f_sp[0] = full_path;
+		}
 		i++;
 	}
-	i = 0;
-	while (paths[i] != NULL && data->cmd2 != NULL)
-	{
-		full_path2 = ft_strjoin(paths[i], cmd2);
-		if (access(full_path2, X_OK))
-			data->cmd2 = full_path2;
-		i++;
-	}
-	free(full_path1);
-	free(full_path2);
-	if (data->cmd1 == NULL || data->cmd2 == NULL)
+	free(full_path);
+	if (cmd == NULL)
 		return (0);
 	return (1);
 }
 
 int	check_cmd(char *cmd1, char *cmd2, t_data *data)
 {
-	char	**full_path1;
-	char	**full_path2;
+	char	**cmd_f_sp1;
+	char	**cmd_f_sp2;
+	int	set_path1;
+	int	set_path2;
+	char	*space_str;
 
-	if (cmd1 == NULL || cmd2 == NULL)
+	if (cmd1 == NULL || cmd2 == NULL || *cmd1 == '\0' || *cmd2 == '\0')
 		return (1);
-	full_path1 = ft_split(cmd1, " ");
-	full_path2 = ft_split(cmd2, " ");
-	if (check_full(cmd1))
-		data->cmd1 = cmd1;
-	if (check_full(cmd2))
-		data->cmd2 = cmd2;
-	if (set_path(cmd1, cmd2, data) == 0)
+	space_str = ft_strdup(" ");
+	cmd_f_sp1 = ft_split(cmd1, *space_str);
+	cmd_f_sp2 = ft_split(cmd2, *space_str);
+	if (check_full(cmd_f_sp1[0]))
+	{	
+		data->cmd1 = cmd_f_sp1[0];
+		data->cmd_f_sp1 = cmd_f_sp1;
+	}
+	if (check_full(cmd_f_sp2[0]))
+	{
+		data->cmd2 = cmd_f_sp2[0];
+		data->cmd_f_sp2 = cmd_f_sp2;
+	}
+	data->cmd_f_sp1 = cmd_f_sp1;
+	data->cmd_f_sp2 = cmd_f_sp2;
+	set_path1 = set_path(data->cmd_f_sp1, data->cmd1);
+	set_path2 = set_path(data->cmd_f_sp2, data->cmd2);
+	free(cmd_f_sp1);
+	free(cmd_f_sp2);
+	free(space_str);
+	if (set_path1 == 0 || set_path2 == 0)
 	{
 		perror("access");
 		ft_printf("Command not found\n");
