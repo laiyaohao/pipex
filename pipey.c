@@ -15,6 +15,7 @@
 int	pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd, char **cmd_f_sp)
 {
 	close(close_pfd);
+	ft_printf("cmd: %s", cmd);
 	if (pid == 0)
 	{
 		dup2(use_pfd, infile);

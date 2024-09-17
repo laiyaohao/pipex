@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_front.c                                  :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 01:35:06 by ylai              #+#    #+#             */
-/*   Updated: 2024/05/25 10:23:33 by ylai             ###   ########.fr       */
+/*   Created: 2024/06/02 19:17:27 by ylai              #+#    #+#             */
+/*   Updated: 2024/06/02 19:57:18 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_front(t_list **lst, t_list *new)
+/**
+ * @brief Checks if a given character is uppercase (A-Z).
+ * @param c The character to check.
+ * @return 1 if the character is uppercase, 0 otherwise.
+*/
+int	ft_isupper(int c)
 {
-	if (lst && *lst && new)
+	if (c <= 'Z' && c >= 'A')
 	{
-		new->next = *lst;
-		*lst = new;
+		return (1);
 	}
+	return (0);
 }

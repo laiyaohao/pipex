@@ -1,31 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 01:47:16 by ylai              #+#    #+#             */
-/*   Updated: 2024/05/22 14:40:05 by ylai             ###   ########.fr       */
+/*   Created: 2024/06/02 20:59:03 by ylai              #+#    #+#             */
+/*   Updated: 2024/06/02 21:07:46 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+/**
+ * @brief Returns the absolute value of a number.
+ * @param num The number to get the absolute value of.
+ * @return The absolute value of the number.
+*/
+long	ft_abs(long num)
 {
-	t_list	*last;
-
-	if (lst)
-	{
-		if (*lst)
-		{
-			last = ft_lstlast(*lst);
-			last->next = new;
-		}
-		else
-		{
-			*lst = new;
-		}
-	}
+	if (num < 0)
+		return (-num);
+	return (num);
 }

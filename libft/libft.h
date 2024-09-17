@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 18:20:18 by ylai              #+#    #+#             */
-/*   Updated: 2024/05/26 15:25:38 by ylai             ###   ########.fr       */
+/*   Updated: 2024/06/02 21:38:12 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+int					ft_islower(int c);
+int					ft_isupper(int c);
+long				ft_abs(long len);
+int					ft_isnegative(int n);
+int					ft_ispositive(int n);
 t_list				*ft_lstnew(void *content);
 void				ft_lstadd_front(t_list **lst, t_list *new);
 int					ft_lstsize(t_list *lst);

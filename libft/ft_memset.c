@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 17:45:41 by ylai              #+#    #+#             */
-/*   Updated: 2024/05/25 18:22:41 by ylai             ###   ########.fr       */
+/*   Updated: 2024/06/04 14:22:49 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * This function sets the first `n` bytes of the block of memory pointed to
  * by `s` to the specified value `c`.
  *
- * @param s Pointer to the block of memory to fill.
+ * @param `*s` Pointer to the block of memory to fill.
  * @param c Value to set. The value is passed as an int, but the function
  *          fills the block of memory using the unsigned char conversion
  *          of this value.

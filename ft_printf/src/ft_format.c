@@ -26,6 +26,15 @@ void	ft_format(const char *str, int *ans, size_t *i, va_list args)
 		ft_print_hex(args, ans, str[*i + 1]);
 	else if (str[*i + 1] == 'p')
 		ft_print_add(args, ans);
-	else
+	else if (str[*i + 1] == '\0')
+	{
 		ft_putchar(str[*i + 1], ans);
+		*i -= 1;
+		*ans -= 2;
+	}
+	else
+	{
+		ft_putchar(str[*i], ans);
+		ft_putchar(str[*i + 1], ans);
+	}
 }

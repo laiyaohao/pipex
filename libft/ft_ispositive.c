@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   ft_ispositive.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/21 01:54:38 by ylai              #+#    #+#             */
-/*   Updated: 2024/05/25 11:18:39 by ylai             ###   ########.fr       */
+/*   Created: 2024/06/02 21:37:07 by ylai              #+#    #+#             */
+/*   Updated: 2024/06/02 21:39:21 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+/**
+ * @brief Checks if a given number is positive.
+ * @param n The number to check.
+ * @return 1 if the number is positive, 0 otherwise.
+*/
+int	ft_ispositive(int n)
 {
-	if (f == NULL)
-		return ;
-	while (lst)
+	int	pos;
+
+	if (n > 0)
 	{
-		f(lst->content);
-		lst = lst->next;
+		pos = 1;
 	}
+	else
+	{
+		pos = 0;
+	}
+	return (pos);
 }
