@@ -1,8 +1,8 @@
 #include "pipex.h"
 
-int	create_pipe(t_data *data)
+int	create_pipe(int (*pipefd)[])
 {
-	if (pipe(data->pipefd) == -1)
+	if (pipe(*pipefd) == -1)
 	{
 		perror("pipe");
 		return (1);

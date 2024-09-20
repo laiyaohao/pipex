@@ -12,14 +12,25 @@
 
 #include "pipex.h"
 
-int	pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd, char **cmd_f_sp)
+int	pipey(pid_t *pid, int *close_pfd, int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
 {
-	close(close_pfd);
-	ft_printf("cmd: %s", cmd);
-	if (pid == 0)
+	
+	
+	if (*pid == 0)
 	{
-		dup2(use_pfd, infile);
-		close(use_pfd);
+		close(*close_pfd);
+		ft_printf("cmd: %s\n", cmd);
+		if (key == 1)
+		{
+			dup2(*use_pfd, STDOUT_FILENO);
+			dup2(*infile, STDIN_FILENO);
+		}
+		else
+		{
+			dup2(*use_pfd, STDIN_FILENO);
+			dup2(*infile, STDOUT_FILENO);
+		}
+		close(*use_pfd);
 		// right now, cmd will look something like:
 		// "ls -l"
 		// need to split it into 2 parts

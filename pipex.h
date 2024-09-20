@@ -48,10 +48,10 @@ char	*ft_strdup(const char *s);
 int		ft_printf(const char *str, ...);
 int		open_file(char *filepath, t_data *data);
 int		check_cmd(char *cmd1, char *cmd2, t_data *data);
-int		create_pipe(t_data *data);
+int		create_pipe(int (*data)[]);
 int		check_fork(pid_t pid);
 int		num_arg(int argc);
-int		pipey(pid_t pid, int close_pfd, int use_pfd, int infile, char *cmd, char **cmd_f_sp);
+int		pipey(pid_t *pid, int *close_pfd, int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key);
 void  check_outfile(char *filepath, t_data *data);
 
 #endif
