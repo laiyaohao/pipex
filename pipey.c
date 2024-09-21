@@ -12,12 +12,12 @@
 
 #include "pipex.h"
 
-int	pipey(pid_t *pid, int *close_pfd, int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
+int	pipey(int *close_pfd, int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
 {
 	
 	
-	if (*pid == 0)
-	{
+	// if (*pid == 0)
+	// {
 		close(*close_pfd);
 		ft_printf("cmd: %s\n", cmd);
 		if (key == 1)
@@ -38,7 +38,7 @@ int	pipey(pid_t *pid, int *close_pfd, int *use_pfd, int *infile, char *cmd, char
 		if (execve(cmd, cmd_f_sp, NULL) == -1)
 			return (1);
 		return (0);
-	}
+	// }
 	
 	
 	// if (fork() == 0)
@@ -69,6 +69,6 @@ int	pipey(pid_t *pid, int *close_pfd, int *use_pfd, int *infile, char *cmd, char
 	// 		wait(NULL);
 	// 	}
 	// }
-	return (0);
+	// return (0);
 	
 }
