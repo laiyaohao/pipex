@@ -66,12 +66,10 @@ int	check_cmd(char *cmd1, char *cmd2, t_data *data)
 	if (check_full(data->cmd_f_sp1[0]))
 	{	
 		data->cmd1 = data->cmd_f_sp1[0];
-		// data->cmd_f_sp1 = cmd_f_sp1;
 	}
 	if (check_full(data->cmd_f_sp2[0]))
 	{
 		data->cmd2 = data->cmd_f_sp2[0];
-		// data->cmd_f_sp2 = cmd_f_sp2;
 	}
 	// data->cmd_f_sp1 = cmd_f_sp1;
 	// data->cmd_f_sp2 = cmd_f_sp2;
