@@ -12,13 +12,13 @@
 
 #include "pipex.h"
 
-int	pipey(int *close_pfd, int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
+int	pipey(int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
 {
 	
 	
 	// if (*pid == 0)
 	// {
-		close(*close_pfd);
+		// close(*close_pfd);
 		ft_printf("cmd: %s\n", cmd);
 		if (key == 1)
 		{

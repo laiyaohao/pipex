@@ -35,6 +35,7 @@ int	set_path(char ***cmd_f_sp, char **cmd)
 
 		ft_printf("full_path: %s\n", full_path);
 			*cmd = full_path;
+			free(*cmd_f_sp[0]);
 			*cmd_f_sp[0] = full_path;
 		}
 		i++;
@@ -64,18 +65,18 @@ int	check_cmd(char *cmd1, char *cmd2, t_data *data)
 	data->cmd_f_sp2 = ft_split(cmd2, *space_str);
 	ft_printf("in check_cmd\n");
 	if (check_full(data->cmd_f_sp1[0]))
-	{	
 		data->cmd1 = data->cmd_f_sp1[0];
-	}
+	else
+		set_path1 = set_path(&(data->cmd_f_sp1), &(data->cmd1));
 	if (check_full(data->cmd_f_sp2[0]))
-	{
 		data->cmd2 = data->cmd_f_sp2[0];
-	}
+	else
+		set_path2 = set_path(&(data->cmd_f_sp2), &(data->cmd2));
 	// data->cmd_f_sp1 = cmd_f_sp1;
 	// data->cmd_f_sp2 = cmd_f_sp2;
 	ft_printf("data->cmd_f_sp1: %s\n", data->cmd_f_sp1[0]);
-	set_path1 = set_path(&(data->cmd_f_sp1), &(data->cmd1));
-	set_path2 = set_path(&(data->cmd_f_sp2), &(data->cmd2));
+	// set_path1 = set_path(&(data->cmd_f_sp1), &(data->cmd1));
+	// set_path2 = set_path(&(data->cmd_f_sp2), &(data->cmd2));
 	
 	// free(cmd_f_sp1);
 	// free(cmd_f_sp2);

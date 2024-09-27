@@ -17,7 +17,7 @@ int	num_arg(int argc)
 	if (argc != 5)
 	{
 		ft_printf("Wrong number of arguments\nUsage: ./pipex infile cmd1 cmd2 \
-							outfile\n");
+outfile\n");
 		return (1);
 	}
 	return (0);

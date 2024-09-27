@@ -23,15 +23,36 @@ int	main(int argc, char **argv)
 	check_cmd(argv[2], argv[3], &data))
 		return (1);
 	data.pid1 = fork();
+	if (check_fork(data.pid1) == 0 && data.pid1 == 0)
+	{
+		close(pipefd[0]);
+		ft_printf("inside the correct con 1\n");
+		if (pipey(&(pipefd[1]), &(data.infile), data.cmd1, data.cmd_f_sp1, 1))
+			return (1);
+	}
+	else if (check_fork(data.pid1) == 1)
+		return (1);
+	/*
 	if (data.pid1 == 0 && (check_fork(data.pid1) || \
 	pipey(&(pipefd[0]), &(pipefd[1]), &(data.infile), data.cmd1, data.cmd_f_sp1, 1)))
 		return (1);
+	*/
 	check_outfile(argv[4], &data);
 	data.pid2 = fork();
-	
-	if (data.pid2 == 0 && (check_fork(data.pid2) || \
-	pipey(&(pipefd[1]), &(pipefd[0]), &(data.outfile), data.cmd2, data.cmd_f_sp2, 2)))
+	if (check_fork(data.pid2) == 0 && data.pid2 == 0)
+	{
+		close(pipefd[1]);
+		ft_printf("inside the correct con 2\n");
+		if (pipey(&(pipefd[0]), &(data.outfile), data.cmd2, data.cmd_f_sp2, 2))
+			return (1);
+	}
+	else if (check_fork(data.pid2) == 1)
 		return (1);
+	/*
+	// if (data.pid2 == 0 && (check_fork(data.pid2) || \
+	// pipey(&(pipefd[1]), &(pipefd[0]), &(data.outfile), data.cmd2, data.cmd_f_sp2, 2)))
+	// 	return (1);
+		*/
 	close(pipefd[0]);
 	close(pipefd[1]);
 	waitpid(data.pid1, NULL, 0);

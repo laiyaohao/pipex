@@ -52,7 +52,7 @@ int		create_pipe(int (*data)[]);
 int		check_fork(pid_t pid);
 int		num_arg(int argc);
 void  free_things(t_data *data);
-int		pipey(int *close_pfd, int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key);
+int		pipey(int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key);
 void  check_outfile(char *filepath, t_data *data);
 
 #endif
