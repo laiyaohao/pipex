@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipey.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 15:11:14 by ylai              #+#    #+#             */
-/*   Updated: 2024/09/08 19:43:29 by ylai             ###   ########.fr       */
+/*   Updated: 2024/09/28 18:44:50 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	pipey(int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
 		// need to split it into 2 parts
 		// first, "ls"
 		if (execve(cmd, cmd_f_sp, NULL) == -1)
+		{
 			return (1);
+		}
 		return (0);
 	// }
 	

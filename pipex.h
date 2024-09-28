@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:55:01 by ylai              #+#    #+#             */
-/*   Updated: 2024/09/08 18:12:40 by ylai             ###   ########.fr       */
+/*   Updated: 2024/09/28 17:43:17 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 
 typedef struct s_data
 {
+	char	**paths;
 	pid_t	pid1;
 	pid_t	pid2;
 	int		pipefd[2];
@@ -38,14 +39,14 @@ typedef struct s_data
 	char	**cmd_f_sp2;
 }						t_data;
 
-extern char *paths[];
-
 char	*ft_strnstr(const char *big, const char *little, size_t len);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
+int	ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_printf(const char *str, ...);
+void	initialize_paths(t_data *data, char **envp);
 int		open_file(char *filepath, t_data *data);
 int		check_cmd(char *cmd1, char *cmd2, t_data *data);
 int		create_pipe(int (*data)[]);
