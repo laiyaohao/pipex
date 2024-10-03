@@ -1,16 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize_paths.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/03 20:48:52 by ylai              #+#    #+#             */
+/*   Updated: 2024/10/03 20:48:53 by ylai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
-
-// char  *paths[] = {
-//   "/usr/bin/",
-//   "/usr/sbin/",
-//   "/bin/",
-//   "/sbin/",
-//   "/usr/local/sbin/",
-//   "/usr/local/bin/",
-//   NULL,
-// };
-
-// char	*paths[] = getenv("PATH");
 
 void	initialize_paths(t_data *data, char **envp)
 {
@@ -18,6 +18,7 @@ void	initialize_paths(t_data *data, char **envp)
 	int	i;
 
 	i = 0;
+	raw_paths = NULL;
 	while (envp != NULL && envp[i] != NULL)
 	{
 		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
@@ -28,6 +29,4 @@ void	initialize_paths(t_data *data, char **envp)
 		i++;
 	}
 	data->paths = ft_split(raw_paths, ':');
-
-	// data->paths = ft_split(raw_paths, ':');
 }

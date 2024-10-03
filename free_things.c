@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_things.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/03 19:06:08 by ylai              #+#    #+#             */
+/*   Updated: 2024/10/03 20:46:50 by ylai             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "pipex.h"
 
 void  free_things(t_data *data)
@@ -27,14 +39,4 @@ void  free_things(t_data *data)
 		i++;
 	}
 	free(data->paths);
-	// ft_printf("finished freeing\n");
-  // free(data->cmd_f_sp1[0]);
-  // free(data->cmd_f_sp2[0]);
-  // free(data->cmd_f_sp1[1]);
-  // free(data->cmd_f_sp2[1]);
-
-  // free(data->cmd_f_sp1[2]);
-  // free(data->cmd_f_sp2[2]);
-  // free(data->cmd_f_sp1);
-  // free(data->cmd_f_sp2);
 }
