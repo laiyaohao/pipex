@@ -1,0 +1,31 @@
+chmod 000 a
+./pipex a ls ls b (cannot read file but file exists)
+
+OR ./pipex c ls ls b (invalid file)
+==> memory leak
+
+./pipex a ls las b
+==> memory leak (invalid command, execve failed)
+
+above solved.
+
+env -i ./pipex c cat "dr/pipex" b
+doesn't run file with path specified when env is null
+
+env -i ./pipex c cat "pipex" b
+doesn't run local executable with no path specified when env is null
+
+
+
+ylai@c2r4s13:~/pipex$ <a cat | ls > b
+bash: a: No such file or directory
+ylai@c2r4s13:~/pipex$ echo $?
+0
+ylai@c2r4s13:~/pipex$ ./pipex c cat "ls" b
+Problem accessing the c.
+ylai@c2r4s13:~/pipex$ echo $?
+1
+
+return value is wrong.
+
+

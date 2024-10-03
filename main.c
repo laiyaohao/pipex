@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:38:36 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/03 20:45:55 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/03 23:04:41 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	int	pipefd[2];
 	
-	data.cmd1 = NULL;
-	data.cmd2 = NULL;
+	ft_memset(&data, 0, sizeof(t_data));
 	initialize_paths(&data, envp);
 	if (num_arg(argc) || open_file(argv[1], &data) || \
 	create_pipe(&pipefd) || check_cmd(argv[2], argv[3], &data))
-		return (1);
+	{
+		free_things(&data);
+		return (0);
+	}
 	data.pid1 = fork();
 	if (check_fork(data.pid1) == 0 && data.pid1 == 0)
 	{

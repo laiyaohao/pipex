@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:55:01 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/03 19:59:07 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/03 23:02:53 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	**ft_split(char const *s, char c);
 char	*ft_strdup(const char *s);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
+void	*ft_memset(void *s, int c, size_t n);
 int		ft_printf(const char *str, ...);
 void	initialize_paths(t_data *data, char **envp);
 int		open_file(char *filepath, t_data *data);
