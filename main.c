@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:38:36 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/03 23:04:41 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/04 17:19:32 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,16 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 	int	pipefd[2];
 	
+	// envp = NULL;
 	ft_memset(&data, 0, sizeof(t_data));
 	initialize_paths(&data, envp);
+	// fake_paths(&data);
+	// int i = 0;
+	// while (data.fake_paths[i] != NULL)
+	// {
+	// 	ft_printf("%s\n", data.fake_paths[i]);
+	// 	i++;
+	// }
 	if (num_arg(argc) || open_file(argv[1], &data) || \
 	create_pipe(&pipefd) || check_cmd(argv[2], argv[3], &data))
 	{

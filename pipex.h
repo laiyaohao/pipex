@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:55:01 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/03 23:02:53 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/04 15:06:35 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 typedef struct s_data
 {
 	char	**paths;
+	char  *fake_paths[7];
 	pid_t	pid1;
 	pid_t	pid2;
 	int		pipefd[2];
@@ -48,6 +49,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 int		ft_printf(const char *str, ...);
 void	initialize_paths(t_data *data, char **envp);
+void	fake_paths(t_data *data);
 int		open_file(char *filepath, t_data *data);
 int		check_cmd(char *cmd1, char *cmd2, t_data *data);
 int		create_pipe(int (*data)[]);
