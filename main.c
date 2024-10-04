@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:38:36 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/04 17:19:32 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/04 17:41:20 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,32 @@ int	main(int argc, char **argv, char **envp)
 	{
 		close(pipefd[0]);
 		if (pipey(&(pipefd[1]), &(data.infile), data.cmd1, data.cmd_f_sp1, 1))
-			return (1);
+		{
+			free_things(&data);
+			return (0);
+		}
 	}
 	else if (check_fork(data.pid1) == 1)
-		return (1);
+	{
+		free_things(&data);
+		return (0);
+	}
 	check_outfile(argv[4], &data);
 	data.pid2 = fork();
 	if (check_fork(data.pid2) == 0 && data.pid2 == 0)
 	{
 		close(pipefd[1]);
 		if (pipey(&(pipefd[0]), &(data.outfile), data.cmd2, data.cmd_f_sp2, 2))
-			return (1);
+		{
+			free_things(&data);
+			return (0);
+		}
 	}
 	else if (check_fork(data.pid2) == 1)
-		return (1);
+	{
+		free_things(&data);
+		return (0);
+	}
 	close(pipefd[0]);
 	close(pipefd[1]);
 	waitpid(data.pid1, NULL, 0);
