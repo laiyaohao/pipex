@@ -37,6 +37,7 @@ int	main(int argc, char **argv, char **envp)
 	if (check_fork(data.pid1) == 0 && data.pid1 == 0)
 	{
 		close(pipefd[0]);
+			ft_printf("did i free things?\n");
 		if (pipey(&(pipefd[1]), &(data.infile), data.cmd1, data.cmd_f_sp1, 1))
 		{
 			free_things(&data);
@@ -55,6 +56,7 @@ int	main(int argc, char **argv, char **envp)
 		close(pipefd[1]);
 		if (pipey(&(pipefd[0]), &(data.outfile), data.cmd2, data.cmd_f_sp2, 2))
 		{
+			ft_printf("safsa");
 			free_things(&data);
 			return (0);
 		}
