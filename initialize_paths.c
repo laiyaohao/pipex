@@ -12,9 +12,10 @@
 
 #include "pipex.h"
 
-void	initialize_paths(t_data *data, char **envp)
+char	*initialize_paths(char **envp)
 {
 	char	*raw_paths;
+	char	**paths;
 	int	i;
 
 	i = 0;
@@ -28,5 +29,7 @@ void	initialize_paths(t_data *data, char **envp)
 		}
 		i++;
 	}
-	data->paths = ft_split(raw_paths, ':');
+	// data->paths = ft_split(raw_paths, ':');
+	// paths = ft_split(raw_paths, ':');
+	return (raw_paths);
 }

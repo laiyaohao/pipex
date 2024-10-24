@@ -12,17 +12,18 @@
 
 #include "pipex.h"
 
-int open_file(char *filepath, t_data *data)
+int open_file(char *in_filepath, char *out_filepath, t_data *data)
 {
-	if (access(filepath, F_OK) == -1)
-	{
-		ft_printf("Problem accessing the %s.\n", filepath);
-		return (1);
-	}
-	data->infile = open(filepath, O_RDONLY);
+	data->infile = open(in_filepath, O_RDONLY);
 	if (data->infile == -1)
 	{
-		ft_printf("Problem opening the %s.\n", filepath);
+		ft_printf("Problem opening the %s.\n", in_filepath);
+		return (1);
+	}
+	data->outfile = open(out_filepath, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (data->outfile == -1)
+	{
+		ft_printf("Problem opening the %s.\n", out_filepath);
 		return (1);
 	}
 	return (0);

@@ -12,13 +12,53 @@
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+int	execute(char *argv, char **envp)
+{
+	char	*raw_paths;
+	char	*path;
+	char	**av;
+	
+	av = ft_split(argv, ' ');
+	if (!av)
+		return (-1);
+	raw_paths = initialize_paths(envp);
+	if (ft_strncmp(av[0], "./", 2))
+		path = get_path(av[0], raw_paths);
+	else
+		path = argv;
+}
+
+pid_t	forking(t_data *data, char **envp, char *argv, int key)
+{
+	pid_t	pid;
+
+	pid = fork();
+	if (check_fork(pid))
+	{
+		free_things(data);
+		exit(1);
+	}
+	if (pid == 0)
+	{
+		pipey(data->pipefd[1], data->infile);
+		if (execute == -1)
+	}
+	return (pid);
+}
+
+int	main(int ac, char **argv, char **envp)
 {
 	t_data	data;
 	int	pipefd[2];
+	pid_t	pid1;
+	pid_t	pid2;
 	
 	// envp = NULL;
 	ft_memset(&data, 0, sizeof(t_data));
+	if (num_arg(ac) || open_file(argv[1], argv[4], &data) || create_pipe(&data))
+		return (1);
+	pid1 = forking(&data, envp, argv[2], 1);
+
 	initialize_paths(&data, envp);
 	// fake_paths(&data);
 	// int i = 0;
@@ -27,8 +67,7 @@ int	main(int argc, char **argv, char **envp)
 	// 	ft_printf("%s\n", data.fake_paths[i]);
 	// 	i++;
 	// }
-	if (num_arg(argc) || open_file(argv[1], &data) || \
-	create_pipe(&pipefd) || check_cmd(argv[2], argv[3], &data))
+	if (check_cmd(argv[2], argv[3], &data))
 	{
 		free_things(&data);
 		return (0);
@@ -49,7 +88,6 @@ int	main(int argc, char **argv, char **envp)
 		free_things(&data);
 		return (0);
 	}
-	check_outfile(argv[4], &data);
 	data.pid2 = fork();
 	if (check_fork(data.pid2) == 0 && data.pid2 == 0)
 	{

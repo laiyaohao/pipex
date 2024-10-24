@@ -14,21 +14,27 @@
 
 int	pipey(int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
 {
+	int	status1;
+	int	status2;
+
 	if (key == 1)
 	{
-		dup2(*use_pfd, STDOUT_FILENO);
-		dup2(*infile, STDIN_FILENO);
+		status1 = dup2(*use_pfd, STDOUT_FILENO);
+		status2 = dup2(*infile, STDIN_FILENO);
 	}
 	else
 	{
-		dup2(*use_pfd, STDIN_FILENO);
-		dup2(*infile, STDOUT_FILENO);
+		status1 = dup2(*use_pfd, STDIN_FILENO);
+		status2 = dup2(*infile, STDOUT_FILENO);
 	}
 	close(*use_pfd);
-	if (execve(cmd, cmd_f_sp, NULL) == -1)
-	{
-		perror("execve");
-		return (1);
-	}
+	close(*infile);
+	// if (execve(cmd, cmd_f_sp, NULL) == -1)
+	// {
+	// 	perror("execve");
+	// 	return (1);
+	// }
+	if (status1 == -1 || status2 == -1)
+		exit(1);
 	return (0);
 }

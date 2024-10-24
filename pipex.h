@@ -50,7 +50,7 @@ void	*ft_memset(void *s, int c, size_t n);
 int		ft_printf(const char *str, ...);
 void	initialize_paths(t_data *data, char **envp);
 void	fake_paths(t_data *data);
-int		open_file(char *filepath, t_data *data);
+int		open_file(char *in_filepath, char *out_filepath, t_data *data);
 int		check_cmd(char *cmd1, char *cmd2, t_data *data);
 int		create_pipe(int (*data)[]);
 int		check_fork(pid_t pid);
