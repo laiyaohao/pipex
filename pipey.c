@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 15:11:14 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/24 17:14:15 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/24 19:54:08 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ void	pipey(t_data *data, int key)
 	close(data->pipefd[1]);
 	close(data->infile);
 	close(data->outfile);
-	// if (execve(cmd, cmd_f_sp, NULL) == -1)
-	// {
-	// 	perror("execve");
-	// 	return (1);
-	// }
 	if (status1 == -1 || status2 == -1)
 		exit(1);
 }

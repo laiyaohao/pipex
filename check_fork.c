@@ -6,18 +6,18 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/03 19:06:24 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/03 19:06:25 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/24 19:48:16 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int check_fork(pid_t pid)
+int	check_fork(pid_t pid)
 {
-  if (pid == -1)
+	if (pid == -1)
 	{
 		perror("fork");
 		return (1);
 	}
-  return (0);
+	return (0);
 }

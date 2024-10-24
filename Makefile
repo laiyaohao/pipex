@@ -6,7 +6,7 @@
 #    By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/02 16:36:06 by ylai              #+#    #+#              #
-#    Updated: 2024/10/24 16:45:36 by ylai             ###   ########.fr        #
+#    Updated: 2024/10/24 20:21:22 by ylai             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ FT_PRINTF_DIR := ft_printf
 FT_PRINTF := ${FT_PRINTF_DIR}/libftprintf.a
 LIBFT_DIR := libft
 LIBFT := ${LIBFT_DIR}/libft.a
-SRC_FILE_NAMES := main check_cmd check_fork create_pipe initialize_paths \
-									num_arg open_file pipey check_outfile free_things fake_paths \
-									get_path
+SRC_FILE_NAMES := main check_fork create_pipe \
+									num_arg open_file pipey free_things \
+									get_path forking
 SRCS := ${addsuffix .c, $(SRC_FILE_NAMES)}
 OBJS := ${SRCS:.c=.o}
 

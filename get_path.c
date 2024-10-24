@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 16:18:51 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/24 16:18:52 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/24 20:16:09 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,26 @@
 
 char	*get_path(char *cmd, char *raw_paths)
 {
-	char	**paths;
-	char	*s_path;
-	char	*path;
+	char	**envs;
+	char	*sub_path;
+	char	*full_path;
 	int		i;
 
-	paths = ft_split((raw_paths) + 5, ':');
+	envs = ft_split((raw_paths) + 5, ':');
 	i = 0;
-	while (paths[i])
+	while (envs[i])
 	{
-		s_path = ft_strjoin("/", cmd);
-		path = ft_strjoin(paths[i], s_path);
-		free(s_path);
-		if (!access(path, F_OK | R_OK | X_OK))
+		sub_path = ft_strjoin("/", cmd);
+		full_path = ft_strjoin(envs[i], sub_path);
+		free(sub_path);
+		if (!access(full_path, F_OK | R_OK | X_OK))
 			break ;
-		free(path);
-		path = NULL;
+		free(full_path);
+		full_path = NULL;
 		i++;
 	}
-	i = 0;
-	while (paths[i])
-		free(paths[i++]);
-	free(paths);
-	if (!path)
+	free_things(envs);
+	if (!full_path)
 		return (cmd);
-	return (path);
+	return (full_path);
 }
