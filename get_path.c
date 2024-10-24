@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   initialize_paths.c                                 :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 20:48:52 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/24 19:15:04 by ylai             ###   ########.fr       */
+/*   Created: 2024/10/24 16:18:51 by ylai              #+#    #+#             */
+/*   Updated: 2024/10/24 16:18:52 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*initialize_paths(char **envp)
+char	*get_path(char *cmd, char *raw_paths)
 {
-	char	*raw_paths;
-	int	i;
+	char	**paths;
+	char	*s_path;
+	char	*path;
+	int		i;
 
+	paths = ft_split((raw_paths) + 5, ':');
 	i = 0;
-	raw_paths = NULL;
-	while (envp != NULL && envp[i] != NULL)
+	while (paths[i])
 	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-		{
-			raw_paths = envp[i] + 5;
+		s_path = ft_strjoin("/", cmd);
+		path = ft_strjoin(paths[i], s_path);
+		free(s_path);
+		if (!access(path, F_OK | R_OK | X_OK))
 			break ;
-		}
+		free(path);
+		path = NULL;
 		i++;
 	}
-	return (raw_paths);
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
+	if (!path)
+		return (cmd);
+	return (path);
 }

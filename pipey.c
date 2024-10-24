@@ -6,29 +6,31 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/07 15:11:14 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/03 20:44:57 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/24 17:14:15 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	pipey(int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
+void	pipey(t_data *data, int key)
 {
 	int	status1;
 	int	status2;
 
 	if (key == 1)
 	{
-		status1 = dup2(*use_pfd, STDOUT_FILENO);
-		status2 = dup2(*infile, STDIN_FILENO);
+		status1 = dup2(data->pipefd[1], STDOUT_FILENO);
+		status2 = dup2(data->infile, STDIN_FILENO);
 	}
 	else
 	{
-		status1 = dup2(*use_pfd, STDIN_FILENO);
-		status2 = dup2(*infile, STDOUT_FILENO);
+		status1 = dup2(data->pipefd[0], STDIN_FILENO);
+		status2 = dup2(data->outfile, STDOUT_FILENO);
 	}
-	close(*use_pfd);
-	close(*infile);
+	close(data->pipefd[0]);
+	close(data->pipefd[1]);
+	close(data->infile);
+	close(data->outfile);
 	// if (execve(cmd, cmd_f_sp, NULL) == -1)
 	// {
 	// 	perror("execve");
@@ -36,5 +38,4 @@ int	pipey(int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key)
 	// }
 	if (status1 == -1 || status2 == -1)
 		exit(1);
-	return (0);
 }

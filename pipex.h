@@ -6,7 +6,7 @@
 /*   By: ylai <ylai@student.42singapore.sg>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/02 16:55:01 by ylai              #+#    #+#             */
-/*   Updated: 2024/10/04 15:06:35 by ylai             ###   ########.fr       */
+/*   Updated: 2024/10/24 19:14:55 by ylai             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,16 @@ char	*ft_strdup(const char *s);
 int	ft_strncmp(const char *s1, const char *s2, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 int		ft_printf(const char *str, ...);
-void	initialize_paths(t_data *data, char **envp);
+char	*initialize_paths(char **envp);
 void	fake_paths(t_data *data);
-int		open_file(char *in_filepath, char *out_filepath, t_data *data);
+void	open_file(char *in_filepath, char *out_filepath, t_data *data);
 int		check_cmd(char *cmd1, char *cmd2, t_data *data);
-int		create_pipe(int (*data)[]);
+int		create_pipe(t_data *data);
 int		check_fork(pid_t pid);
 int		num_arg(int argc);
 void  free_things(t_data *data);
-int		pipey(int *use_pfd, int *infile, char *cmd, char **cmd_f_sp, int key);
+void	pipey(t_data *data, int key);
 void  check_outfile(char *filepath, t_data *data);
+char	*get_path(char *cmd, char *raw_paths);
 
 #endif
